@@ -9,10 +9,10 @@ namespace Contacts.maui.Models
     public static class ContactRepository
     {
         public static List<Contact> _contacts = [
-            new Contact{ ContactId = 1, Name="john doe", Email="johnd@gmail.com" },
-            new Contact{ ContactId = 2, Name="joe cee", Email="jc@gmail.com" },
-            new Contact{ ContactId = 3, Name="alex g", Email="alexg@gmail.com" },
-            new Contact{ ContactId = 4, Name="james f", Email="jf@gmail.com" },
+            new Contact{ ContactId = 1, Name="john doe", Email="johnd@gmail.com", Phone="072139816", Address="123 Goop Ave" },
+            new Contact{ ContactId = 2, Name="joe cee", Email="jc@gmail.com", Phone="0777651239", Address="123 Goop Ave" },
+            new Contact{ ContactId = 3, Name="alex g", Email="alexg@gmail.com", Phone="0712312319", Address="123 Goop Ave" },
+            new Contact{ ContactId = 4, Name="james f", Email="jf@gmail.com", Phone="0777657849", Address="123 Goop Ave" },
         ];
 
         public static List<Contact> GetContacts() { return _contacts; }
@@ -20,6 +20,15 @@ namespace Contacts.maui.Models
         public static Contact? GetContactById(int contactId)
         {
             return _contacts.FirstOrDefault(x => x.ContactId == contactId);
+        }
+
+        public static void UpdateContactById(int? contactId, Contact contact)
+        {
+            if(contactId == null) throw new ArgumentNullException(nameof(contact));
+
+            int index = _contacts.FindIndex(x => (x.ContactId == contactId));
+
+            _contacts.Insert(index, contact);
         }
     }
 
