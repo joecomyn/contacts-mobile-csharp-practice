@@ -1,4 +1,5 @@
 using Contacts.maui.Models;
+using System.Collections.ObjectModel;
 using Contact = Contacts.maui.Models.Contact;
 namespace Contacts.maui.View;
 
@@ -14,7 +15,7 @@ public partial class ContactsPage : ContentPage
     {
         base.OnAppearing();
 
-        List<Contact> contacts = ContactRepository.GetContacts();
+        var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
 
         listContacts.ItemsSource = contacts;
     }
