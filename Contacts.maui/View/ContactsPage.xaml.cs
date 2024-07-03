@@ -5,13 +5,19 @@ namespace Contacts.maui.View;
 public partial class ContactsPage : ContentPage
 {
     public ContactsPage() {
+
         InitializeComponent();
+
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
 
         List<Contact> contacts = ContactRepository.GetContacts();
 
         listContacts.ItemsSource = contacts;
     }
-
     private void btnEditContact_Clicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync(nameof(EditContactPage));
