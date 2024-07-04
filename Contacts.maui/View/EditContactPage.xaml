@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:Contacts.maui.View.Control"
              x:Class="Contacts.maui.View.EditContactPage"
              Title="Edit Contact">
-    <VerticalStackLayout Spacing="10" Margin="20,10,20,10">
-        <Frame Padding="10">
-            <HorizontalStackLayout>
-                <Label Text="Name" VerticalOptions="Center"></Label>
-                <Entry VerticalOptions="Center" x:Name="namePlaceHolder"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-        <Frame Padding="10">
-            <HorizontalStackLayout>
-                <Label Text="Email" VerticalOptions="Center"></Label>
-                <Entry VerticalOptions="Center" x:Name="emailPlaceHolder"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-        <Frame Padding="10">
-            <HorizontalStackLayout>
-                <Label Text="Phone number" VerticalOptions="Center"></Label>
-                <Entry VerticalOptions="Center" x:Name="phoneNumPlaceHolder"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-        <Frame Padding="10">
-            <HorizontalStackLayout>
-                <Label Text="Address" VerticalOptions="Center"></Label>
-                <Entry VerticalOptions="Center" x:Name="addressPlaceHolder"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-        <Button x:Name="btnSubmit" Clicked="btnSubmit_Clicked" Text="Update"></Button>
-        <Button x:Name="btnCancel" Clicked="btnCancel_Clicked" Text="Cancel"></Button>
-    </VerticalStackLayout>
+    <controls:ContactControl
+        x:Name="contactCtl"
+        OnSave="btnSubmit_Clicked"
+        OnCancel="btnCancel_Clicked"
+        OnError="contactCtl_OnError"
+        >
+        
+    </controls:ContactControl>
 </ContentPage>
