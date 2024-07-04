@@ -28,7 +28,7 @@ namespace Contacts.maui.Models
 
             int index = _contacts.FindIndex(x => (x.ContactId == contactId));
 
-            _contacts.Insert(index, contact);
+            _contacts[index] = contact;
         }
     }
 
