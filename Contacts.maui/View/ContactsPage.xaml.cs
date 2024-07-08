@@ -15,6 +15,8 @@ public partial class ContactsPage : ContentPage
     {
         base.OnAppearing();
 
+        SearchContacts.Text = String.Empty;
+
         RenderContacts();
     }
     private void btnEditContact_Clicked(object sender, EventArgs e)
@@ -55,6 +57,13 @@ public partial class ContactsPage : ContentPage
     private void RenderContacts()
     {
         var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
+
+        listContacts.ItemsSource = contacts;
+    }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var contacts = new ObservableCollection<Contact>(ContactRepository.SearchContacts(SearchContacts.Text));
 
         listContacts.ItemsSource = contacts;
     }
