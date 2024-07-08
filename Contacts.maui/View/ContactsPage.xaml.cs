@@ -15,9 +15,7 @@ public partial class ContactsPage : ContentPage
     {
         base.OnAppearing();
 
-        var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
-
-        listContacts.ItemsSource = contacts;
+        RenderContacts();
     }
     private void btnEditContact_Clicked(object sender, EventArgs e)
     {
@@ -40,5 +38,24 @@ public partial class ContactsPage : ContentPage
     private void listContacts_ItemTapped(object sender, ItemTappedEventArgs e)
     {
         listContacts.SelectedItem = null;
+    }
+
+    private void menuDelete_Clicked(object sender, EventArgs e)
+    {
+        var menuItem = sender as MenuItem;
+        if (menuItem != null)
+        {
+            var contact = menuItem.CommandParameter as Contact;
+            ContactRepository.DeleteContact(contact.ContactId);
+        }
+
+        RenderContacts();
+    }
+
+    private void RenderContacts()
+    {
+        var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
+
+        listContacts.ItemsSource = contacts;
     }
 }

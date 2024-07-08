@@ -81,7 +81,7 @@ public partial class ContactControl : ContentView
         {
             foreach (var error in emailValidator.Errors)
             {
-                OnError?.Invoke(sender, error?.ToString());
+                OnError?.Invoke(sender, error.ToString());
             }
             return;
         }
