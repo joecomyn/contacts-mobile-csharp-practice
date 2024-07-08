@@ -30,6 +30,23 @@ namespace Contacts.maui.Models
 
             _contacts[index] = contact;
         }
+
+        public static void AddContact(Contact contact)
+        {
+            var maxId = _contacts.Max(x => x.ContactId);
+            contact.ContactId = maxId+1;
+            _contacts.Add(contact);
+        }
+
+        public static void DeleteContact(int? contactId)
+        {
+            if(contactId == null) return;
+            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if(contact != null)
+            {
+                _contacts.Remove(contact);
+            }
+        }
     }
 
 }
