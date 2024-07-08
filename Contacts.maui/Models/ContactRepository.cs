@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.ApplicationModel.Communication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,29 @@ namespace Contacts.maui.Models
             {
                 _contacts.Remove(contact);
             }
+        }
+
+        public static List<Contact> SearchContacts(string Filter)
+        {
+
+            var contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(Filter, StringComparison.OrdinalIgnoreCase))?.ToList();
+
+            if(contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Email) && x.Email.StartsWith(Filter, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Phone) && x.Phone.StartsWith(Filter, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Address) && x.Address.StartsWith(Filter, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            return contacts;
         }
     }
 
